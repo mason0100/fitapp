@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">FitnessApp</string>
+    <string name="Title">Fitness App</string>
+    <string name = "UserName">Username</string>
+    <string name = "PassWord">Password</string>
+    <string name = "SignIn">Log In</string>
+    <string name = "CreateUser">Create New User</string>
+    <string name = "ErrorMessage">Error</string>
 </resources>
