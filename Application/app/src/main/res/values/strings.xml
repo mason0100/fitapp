@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">FitnessApp</string>
     <string name="Title">Fitness App</string>
-    <string name = "UserName">Username</string>
-    <string name = "PassWord">Password</string>
-    <string name = "SignIn">Log In</string>
-    <string name = "CreateUser">Create New User</string>
-    <string name = "ErrorMessage">Error</string>
+    <string name="UserName">Username</string>
+    <string name="PassWord">Password</string>
+    <string name="SignIn">Log In</string>
+    <string name="CreateUser">Create New User</string>
+    <string name="ErrorMessage">Error</string>
+    <string name = "Home">home</string>
+    <string name = "Log">log</string>
+    <string name="Plan">plan</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
