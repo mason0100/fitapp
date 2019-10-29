@@ -11,6 +11,8 @@
     <string name="Plan">plan</string>
     <string name="Exercise">exercise</string>
     <string name="Completed">complete</string>
+    <string name="Add">add</string>
+    <string name="Delete">delete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
