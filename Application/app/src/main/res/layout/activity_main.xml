@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity" >
+    android:orientation="vertical"
+    tools:context=".MainActivity">
 
     <fragment
         android:id="@+id/fragment3"
@@ -13,4 +14,41 @@
         android:layout_height="85dp"
         android:layout_weight="1"
         tools:layout="@layout/fragment_screen_navigation" />
+
+    <fragment
+        android:id="@+id/fragment6"
+        android:name="edu.towson.cosc431.nicktaormino.fitnessapp.set_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        tools:layout="@layout/fragment_set_info" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/completed_Exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:listitem="@layout/exercise_item">
+
+        </androidx.recyclerview.widget.RecyclerView>
+    </ScrollView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="20dp"
+        android:layout_weight="1">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/todo_exercises"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:listitem="@layout/exercise_item" />
+    </ScrollView>
+
 </LinearLayout>

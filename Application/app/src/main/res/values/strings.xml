@@ -6,10 +6,11 @@
     <string name="SignIn">Log In</string>
     <string name="CreateUser">Create New User</string>
     <string name="ErrorMessage">Error</string>
-    <string name = "Home">home</string>
-    <string name = "Log">log</string>
+    <string name="Home">home</string>
+    <string name="Log">log</string>
     <string name="Plan">plan</string>
     <string name="Exercise">exercise</string>
+    <string name="Completed">complete</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
