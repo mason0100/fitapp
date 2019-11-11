@@ -4,12 +4,33 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
-        android:id="@+id/fragment5"
-        android:name="edu.towson.cosc431.nicktaormino.fitnessapp.screen_navigation"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="85dp"
-        tools:layout="@layout/fragment_screen_navigation" />
+        android:layout_height="90dp"
+        android:layout_weight="1"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_Home7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Home" />
+
+        <Button
+            android:id="@+id/btn_Home8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Log" />
+
+        <Button
+            android:id="@+id/btn_Home9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/Plan" />
+    </LinearLayout>
 
     <CalendarView
         android:id="@+id/calendarView"
