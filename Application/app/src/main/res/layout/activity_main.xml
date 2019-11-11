@@ -10,7 +10,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="15dp"
+        android:layout_weight="0"
         android:orientation="horizontal">
 
         <Button
@@ -28,121 +30,27 @@
             android:text="@string/Log" />
 
         <Button
-            android:id="@+id/btn_Home9"
+            android:id="@+id/add_exercise_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/Plan" />
+            android:text="@string/add_exercise" />
 
     </LinearLayout>
 
-    <LinearLayout
+    <TextView
+        android:id="@+id/temp_text"
         android:layout_width="match_parent"
-        android:layout_height="182dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_weight="0"
+        android:gravity="center"
+        android:text="@string/protip_spot"
+        android:textSize="25sp" />
 
-        <TextView
-            android:id="@+id/exercise_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Exercise"
-            android:textSize="36sp" />
-
-        <EditText
-            android:id="@+id/s1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/s2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/s3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number" />
-
-        <EditText
-            android:id="@+id/s4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:visibility="gone" />
-
-        <EditText
-            android:id="@+id/s5"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:visibility="gone" />
-
-        <EditText
-            android:id="@+id/s6"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:inputType="number"
-            android:visibility="gone" />
-
-        <Button
-            android:id="@+id/completed_btn2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/Add" />
-
-        <Button
-            android:id="@+id/delete_set_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/Delete" />
-
-        <Button
-            android:id="@+id/add_set_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="0"
-            android:text="@string/Completed" />
-
-    </LinearLayout>
-
-    <ScrollView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/main_exercise_list"
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="1">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/completed_Exercises"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:listitem="@layout/exercise_item">
-
-        </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
-
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_weight="1">
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/todo_exercises"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:listitem="@layout/exercise_item" />
-    </ScrollView>
+        android:layout_height="match_parent"
+        tools:listitem="@layout/exercise_item" />
 
 </LinearLayout>

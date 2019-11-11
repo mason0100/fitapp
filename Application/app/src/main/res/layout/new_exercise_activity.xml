@@ -1,50 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/recycler_view_exercise_item"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     android:orientation="vertical">
 
     <TextView
-        android:id="@+id/exercise_text"
+        android:id="@+id/exercise_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/Exercise"
-        android:textSize="20dp" />
+        android:layout_weight="0"
+        android:text="TextView" />
 
     <EditText
-        android:id="@+id/set1_text"
+        android:id="@+id/exercise1_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:ems="10"
-        android:hint="Set 1"
+        android:hint="@string/Exercise"
         android:inputType="number" />
 
     <EditText
-        android:id="@+id/set2_text"
+        android:id="@+id/exercise2_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:ems="10"
-        android:hint="Set 2"
-        android:inputType="number" />
+        android:hint="@string/Exercise"
+        android:inputType="textPersonName" />
 
     <EditText
-        android:id="@+id/set3_text"
+        android:id="@+id/exercise3_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:ems="10"
-        android:hint="Set 3"
-        android:inputType="number" />
+        android:hint="@string/Exercise"
+        android:inputType="textPersonName" />
 
     <CheckBox
-        android:id="@+id/checkBox"
+        android:id="@+id/checkBox_new"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_weight="0"
         android:text="CheckBox" />
-
-    <Button
-        android:id="@+id/save_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Save" />
 </LinearLayout>
