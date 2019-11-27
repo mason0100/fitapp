@@ -5,27 +5,30 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
-import kotlinx.android.synthetic.main.exercise_item.*
-import kotlinx.android.synthetic.main.new_exercise_activity.*
-import java.time.LocalDate
+import kotlinx.android.synthetic.main.add_new_exercise.*
+
 
 class NewExerciseActivity: AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.new_exercise_activity)
+        setContentView(R.layout.add_new_exercise)
 
+        set1_text.setOnClickListener {  }
+        set2_text.setOnClickListener {  }
+        set3_text.setOnClickListener {  }
         save_button.setOnClickListener{clickSave()}
 
     }
 
     fun clickSave(){
         val intent = Intent()
-        val title: String = exercise_name.editableText.toString()
-        val exercise1: Int = exercise1_new.editableText.toString().toInt()
-        val exercise2: Int = exercise2_new.editableText.toString().toInt()
-        val exercise3: Int = exercise3_new.editableText.toString().toInt()
-        val isComplete : Boolean =checkBox_new.isChecked
+        val title: String = exercise_text.editableText.toString()
+        val exercise1: String = set1_text.editableText.toString()
+        val exercise2: String = set2_text.editableText.toString()
+        val exercise3: String = set3_text.editableText.toString()
+        val isComplete : Boolean =checkBox.isChecked
+
 
 
 

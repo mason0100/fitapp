@@ -2,7 +2,7 @@ package edu.towson.cosc431.nicktaormino.fitnessapp
 
 interface IExerciseListController {
 
-        fun deleteTodo(idx: Int)
+        fun deleteExercise(idx: Int)
         fun toggleIsCompleted(idx: Int)
-        val exercise: ExerciseListItem
+        val exerciseList: ExerciseList
 }
