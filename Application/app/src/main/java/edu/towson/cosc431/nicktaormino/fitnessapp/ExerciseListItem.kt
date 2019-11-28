@@ -1,7 +1,10 @@
 package edu.towson.cosc431.nicktaormino.fitnessapp
 
+import java.util.*
+
 data class ExerciseListItem (
 
+    var id: String,
     var name: String,
     var set1: String,
     var set2: String,

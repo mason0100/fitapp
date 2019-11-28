@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.add_new_exercise.*
+import java.util.*
 
 
 class NewExerciseActivity: AppCompatActivity() {
@@ -23,6 +24,7 @@ class NewExerciseActivity: AppCompatActivity() {
 
     fun clickSave(){
         val intent = Intent()
+        val id = Date().toString()
         val title: String = exercise_text.editableText.toString()
         val exercise1: String = set1_text.editableText.toString()
         val exercise2: String = set2_text.editableText.toString()
@@ -33,7 +35,7 @@ class NewExerciseActivity: AppCompatActivity() {
 
 
         //create Todo_object
-        val todo = ExerciseListItem(title, exercise1, exercise2, exercise3, isComplete)
+        val todo = ExerciseListItem(id,title, exercise1, exercise2, exercise3, isComplete)
         val json = Gson().toJson(todo)
         //
         intent.putExtra(todo_extra_key, json)

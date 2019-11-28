@@ -15,7 +15,7 @@ class ExerciseList: IExerciseList {
     init {
 
         // val dateCreated: String = now().toString()
-        var temp = ExerciseListItem("Bench", "1", "2", "3", false)
+        var temp = ExerciseListItem("1","Bench", "1", "2", "3", false)
 
         exerciseList.add(temp)
         exerciseList.add(temp)
@@ -61,5 +61,23 @@ class ExerciseList: IExerciseList {
 
 
 
+
+}
+
+class ExerciseCache : IExerciseCache {
+    override fun exerciseCount(): Int {
+        return exercise.size
+    }
+
+    override fun getExercise(position: Int): ExerciseListItem {
+        return exercise.get(position)
+    }
+
+    override fun refresh(songs: List<ExerciseListItem>) {
+        this.exercise.clear()
+        this.exercise.addAll(songs)
+    }
+
+    private var exercise: MutableList<ExerciseListItem> = mutableListOf()
 
 }

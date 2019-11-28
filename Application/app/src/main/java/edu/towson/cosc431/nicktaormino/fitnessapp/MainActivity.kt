@@ -18,6 +18,8 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
 
     //public members of class
     override lateinit var exerciseList: ExerciseList
+    lateinit var db: ExerciseDBRepository
+    lateinit var cache: IExerciseCache
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -34,6 +36,9 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
 
         recycler_exercise_list.layoutManager = LinearLayoutManager(this)
 
+        db = ExerciseDBRepository(this)
+        cache = ExerciseCache()
+        cache.refresh((db.getAll()))
 
         //Buttons
         button_home.setOnClickListener{}
@@ -65,17 +70,15 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
                             //Need to add to list
                             Log.i("Exercise", exercise.toString())
                             exerciseList.addExercise(exercise)
-
-
-
-
+                            db.addExercise(exercise)
+                            cache.refresh(db.getAll())
                         }
                     }
                 }
 
             }
             Activity.RESULT_CANCELED -> {
-                Toast.makeText(this, "User Cancelled Todo", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "User Cancelled Exercise", Toast.LENGTH_SHORT).show()
             }
         }
     }
