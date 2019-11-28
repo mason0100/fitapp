@@ -43,6 +43,6 @@ class NewExerciseActivity: AppCompatActivity() {
     }
 
     companion object {
-        val todo_extra_key = "todo"
+        val todo_extra_key = "exercise"
     }
 }

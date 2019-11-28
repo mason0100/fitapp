@@ -35,6 +35,7 @@ class ExerciseList: IExerciseList {
         exerciseList.add(exercise)
 
 
+
     }
 
     override fun deleteExercise(exercise: ExerciseListItem) {

@@ -38,7 +38,9 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         //Buttons
         button_home.setOnClickListener{}
         button_login.setOnClickListener {  }
-        button_add_exercise.setOnClickListener {  }
+        button_add_exercise.setOnClickListener { launchNewTodoActivity() }
+
+        adapter.notifyDataSetChanged()
     }
 
     //Not Helper Functions
@@ -66,6 +68,7 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
 
 
 
+
                         }
                     }
                 }
@@ -80,6 +83,12 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
     companion object{
         val NEW_EXERCISE_CODE = 1;
     }
+
+
+    //Launch Activities
+
+
+
 
 
 
@@ -100,6 +109,7 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         val newExercise = exercise.copy(isComplete = !exercise.isComplete)
         exerciseList.replace(idx, newExercise)
     }
+
 
 
 
