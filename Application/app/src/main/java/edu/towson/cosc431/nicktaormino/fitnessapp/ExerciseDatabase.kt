@@ -156,6 +156,7 @@ class ExerciseDatabase(ctx: Context): IDataBase
 
 private fun toContentValues(exercise: ExerciseListItem): ContentValues{
     val cv = ContentValues()
+    cv.put(BaseColumns._ID, exercise.id)
     cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_NAME, exercise.name)
     cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET1, exercise.set1)
     cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET2, exercise.set2)

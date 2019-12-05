@@ -1,16 +1,27 @@
 package edu.towson.cosc431.nicktaormino.fitnessapp
 
 import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.gson.Gson
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.add_new_exercise.*
 import java.util.*
 
 
 class NewExerciseActivity: AppCompatActivity() {
 
+    val receiver: BroadcastReceiver =object: BroadcastReceiver()
+    {
+        override fun onReceive(ctx: Context?, intent: Intent?) {
+
+
+        }
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.add_new_exercise)
@@ -18,6 +29,8 @@ class NewExerciseActivity: AppCompatActivity() {
         set1_text.setOnClickListener {  }
         set2_text.setOnClickListener {  }
         set3_text.setOnClickListener {  }
+        checkBox.setOnClickListener {  val intent=Intent(this,MyIntentService::class.java)
+            startService(intent)}
         save_button.setOnClickListener{clickSave()}
 
     }
@@ -40,11 +53,24 @@ class NewExerciseActivity: AppCompatActivity() {
         //
         intent.putExtra(todo_extra_key, json)
         setResult(Activity.RESULT_OK, intent)
+        val intent2=Intent(this,MyIntentService::class.java)
+        startService(intent2)
         finish()
 
     }
 
     companion object {
         val todo_extra_key = "exercise"
+    }
+    //todo Register
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(receiver, IntentFilter(MyIntentService.BROADCAST_ACTION))
+
+    }
+    //todo unregister
+    override fun onPause(){
+        super.onPause()
+        unregisterReceiver(receiver)
     }
 }

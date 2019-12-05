@@ -36,16 +36,28 @@
             android:layout_weight="1"
             android:text="@string/add_exercise" />
 
+        <Button
+            android:id="@+id/button_notification"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Notify" />
+
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/temp_text"
+    <fragment
+        android:id="@+id/fragment"
+        android:name="edu.towson.cosc431.nicktaormino.fitnessapp.ProTip"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="0"
-        android:gravity="center"
-        android:text="@string/protip_spot"
-        android:textSize="25sp" />
+        tools:layout="@layout/fragment_pro_tip" />
+
+    <TextView
+        android:id="@+id/result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_exercise_list"

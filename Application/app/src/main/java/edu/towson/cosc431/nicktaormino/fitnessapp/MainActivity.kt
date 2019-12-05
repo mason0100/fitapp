@@ -1,5 +1,7 @@
 package edu.towson.cosc431.nicktaormino.fitnessapp
-
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.IntentFilter
 import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -15,7 +17,14 @@ import kotlinx.android.synthetic.main.activity_main.button_login
 import kotlinx.android.synthetic.main.previous_data.*
 
 class MainActivity : AppCompatActivity(), IExerciseListController {
+    // Todo11 Create a BroadcastReceiver(done)
+    val receiver:BroadcastReceiver=object:BroadcastReceiver()
+    {
+        override fun onReceive(ctx: Context?, intent: Intent?) {
+        button_notification.text="done"
 
+        }
+    }
     //public members of class
     override lateinit var exerciseList: ExerciseList
     lateinit var db: ExerciseDBRepository
@@ -34,7 +43,7 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
 
         recycler_exercise_list.adapter = adapter
 
-        recycler_exercise_list.layoutManager = LinearLayoutManager(this)
+        recycler_exercise_list.layoutManager =LinearLayoutManager(this)
 
         db = ExerciseDBRepository(this)
         cache = ExerciseCache()
@@ -44,7 +53,9 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         button_home.setOnClickListener{}
         button_login.setOnClickListener {  }
         button_add_exercise.setOnClickListener { launchNewTodoActivity() }
-
+        button_notification.setOnClickListener{ // TODO - 10. Start your service(done)
+            val intent=Intent(this,MyIntentService::class.java)
+            startService(intent)}
         adapter.notifyDataSetChanged()
     }
 
@@ -113,7 +124,17 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         exerciseList.replace(idx, newExercise)
     }
 
+//todo Register
+    override fun onResume() {
+        super.onResume()
+        registerReceiver(receiver, IntentFilter(MyIntentService.BROADCAST_ACTION))
 
+    }
+    //todo unregister
+    override fun onPause(){
+        super.onPause()
+        unregisterReceiver(receiver)
+    }
 
 
 }
