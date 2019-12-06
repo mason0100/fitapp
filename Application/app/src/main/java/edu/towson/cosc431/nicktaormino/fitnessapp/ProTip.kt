@@ -7,37 +7,23 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import kotlinx.android.synthetic.main.fragment_pro_tip.view.*
+import kotlin.random.Random
 
 /**
  * A simple [Fragment] subclass.
  */
 class ProTip : Fragment() {
 
-    interface IProTips{
-        enum class tips{ONE,TWO,THREE,FOUR,FIVE,SIX,SEVEN,EIGHT,NINE,TEN}
-        fun tipCycle()
-    }
-
-    val mutableTips: MutableList<DTips> = mutableListOf()
-    val Tips: List<DTips> = mutableTips
-    private var listener:IProTips? = null
+    private var mutableTips: MutableList<DTips> = mutableListOf()
+    private var Tips: List<DTips>? = listOf()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pro_tip, container, false)
-        NetworkHelper()
-            .fetchTip {
-                tips->
-                mutableTips.clear()
-                mutableTips.addAll(tips)
-            }
-        cycleTips(view)
+        val i = (Math.random() * 9).toInt()
+        view.Tip.text = NetworkHelper().fetchTip(i)
         return view
-    }
-    fun cycleTips(view:View?)
-    {
-        //view?.Tip?.text = mutableTips[0].tip
     }
 }

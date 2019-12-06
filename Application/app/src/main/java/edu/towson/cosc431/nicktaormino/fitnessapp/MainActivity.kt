@@ -9,6 +9,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.androidnetworking.AndroidNetworking
 import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.button_add_exercise
@@ -34,6 +35,8 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        AndroidNetworking.initialize(this)
 
         //Data Items
 

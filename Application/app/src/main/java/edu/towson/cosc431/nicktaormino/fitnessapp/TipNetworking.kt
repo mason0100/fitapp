@@ -2,6 +2,7 @@ package edu.towson.cosc431.nicktaormino.fitnessapp
 
 import android.graphics.Bitmap
 import android.renderscript.RenderScript
+import android.widget.Toast
 import com.androidnetworking.AndroidNetworking
 import com.androidnetworking.common.Priority
 import com.androidnetworking.error.ANError
@@ -9,8 +10,9 @@ import com.androidnetworking.interfaces.BitmapRequestListener
 import com.androidnetworking.interfaces.ParsedRequestListener
 
 class NetworkHelper {
-    fun fetchTip(callback: (List<DTips>) -> Unit)
+    fun fetchTip(i:Int):String
     {
+        var ans: String = ""
         AndroidNetworking.get(API_URL)
             .setTag(this)
             .setPriority(Priority.LOW)
@@ -18,19 +20,18 @@ class NetworkHelper {
             .getAsObjectList(DTips::class.java, object: ParsedRequestListener<List<DTips>>{
                 override fun onResponse(response: List<DTips>?) {
                     if(response != null) {
-                        callback(response)
+                        ans = response.get(i).tip
                     }
-                    else throw Exception("Error fetching people")
+                    else throw Exception("Error fetching tips")
                 }
-
                 override fun onError(anError: ANError?) {
-                    TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    System.out.println(anError.toString())
                 }
-
             })
+        return ans
     }
 
     companion object{
-        val API_URL = "https://github.com/nick-taormino2/FitnessAPI/blob/master/db.json"
+        val API_URL = "https://my-json-server.typicode.com/nick-taormino2/FitnessApi/tip"
     }
 }
