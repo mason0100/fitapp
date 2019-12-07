@@ -14,16 +14,12 @@ import com.google.gson.Gson
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main.button_add_exercise
 import kotlinx.android.synthetic.main.activity_main.button_home
-import kotlinx.android.synthetic.main.activity_main.button_login
-import kotlinx.android.synthetic.main.previous_data.*
 
 class MainActivity : AppCompatActivity(), IExerciseListController {
     // Todo11 Create a BroadcastReceiver(done)
     val receiver:BroadcastReceiver=object:BroadcastReceiver()
     {
         override fun onReceive(ctx: Context?, intent: Intent?) {
-        button_notification.text="done"
-
         }
     }
     //public members of class
@@ -53,21 +49,32 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         cache.refresh((db.getAll()))
 
         //Buttons
-        button_home.setOnClickListener{}
-        button_login.setOnClickListener {  }
+        button_home.setOnClickListener{ launchHomeActivity() }
+        button_log.setOnClickListener { launchLogActivity() }
         button_add_exercise.setOnClickListener { launchNewTodoActivity() }
-        button_notification.setOnClickListener{ // TODO - 10. Start your service(done)
-            val intent=Intent(this,MyIntentService::class.java)
-            startService(intent)}
         adapter.notifyDataSetChanged()
     }
 
     //Not Helper Functions
 
+    fun launchHomeActivity(){
+        //launches the new activity and saves data for the result
+        val intent = Intent(this, LogIn::class.java)
+        startActivityForResult(intent, HOME_CODE)
+
+    }
+
     fun launchNewTodoActivity(){
         //launches the new activity and saves data for the result
         val intent = Intent(this, NewExerciseActivity::class.java)
         startActivityForResult(intent,NEW_EXERCISE_CODE)
+
+    }
+
+    fun launchLogActivity(){
+        //launches the new activity and saves data for the result
+        val intent = Intent(this, PreviousLog::class.java)
+        startActivityForResult(intent, LOG_CODE)
 
     }
 
@@ -88,28 +95,39 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
                             cache.refresh(db.getAll())
                         }
                     }
+                    HOME_CODE ->{
+                        val json: String? = data?.getStringExtra(PreviousLog.todo_extra_key)
+                        if (json != null){
+                            val exercise: ExerciseListItem = Gson().fromJson<ExerciseListItem>(json, ExerciseListItem::class.java)
+                            //Need to add to list
+                            Log.i("Exercise", exercise.toString())
+                            exerciseList.addExercise(exercise)
+                            db.addExercise(exercise)
+                            cache.refresh(db.getAll())
+                        }
+
+                    }
+                    LOG_CODE->{
+                        val json: String? = data?.getStringExtra(LogIn.todo_extra_key)
+                        if (json != null){
+                            val exercise: ExerciseListItem = Gson().fromJson<ExerciseListItem>(json, ExerciseListItem::class.java)
+                            Log.i("Exercise", exercise.toString())
+                        }
+                    }
                 }
 
             }
             Activity.RESULT_CANCELED -> {
-                Toast.makeText(this, "User Cancelled Exercise", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "User Cancelled", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
     companion object{
         val NEW_EXERCISE_CODE = 1;
+        val HOME_CODE = 2
+        val LOG_CODE = 3
     }
-
-
-    //Launch Activities
-
-
-
-
-
-
-
 
 
 //Helper Functions

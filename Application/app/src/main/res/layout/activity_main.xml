@@ -23,7 +23,7 @@
             android:text="@string/Home" />
 
         <Button
-            android:id="@+id/button_login"
+            android:id="@+id/button_log"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -35,13 +35,6 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/add_exercise" />
-
-        <Button
-            android:id="@+id/button_notification"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="Notify" />
 
     </LinearLayout>
 
