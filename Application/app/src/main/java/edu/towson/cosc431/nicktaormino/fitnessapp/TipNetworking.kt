@@ -10,9 +10,9 @@ import com.androidnetworking.interfaces.BitmapRequestListener
 import com.androidnetworking.interfaces.ParsedRequestListener
 
 class NetworkHelper {
+    var answer:String = ""
     fun fetchTip(i:Int):String
     {
-        var ans: String = ""
         AndroidNetworking.get(API_URL)
             .setTag(this)
             .setPriority(Priority.LOW)
@@ -20,7 +20,7 @@ class NetworkHelper {
             .getAsObjectList(DTips::class.java, object: ParsedRequestListener<List<DTips>>{
                 override fun onResponse(response: List<DTips>?) {
                     if(response != null) {
-                        ans = response.get(i).tip
+                        updateString(response.get(i).tip)
                     }
                     else throw Exception("Error fetching tips")
                 }
@@ -28,7 +28,12 @@ class NetworkHelper {
                     System.out.println(anError.toString())
                 }
             })
-        return ans
+        return answer
+    }
+
+    fun updateString(input: String)
+    {
+        answer = input
     }
 
     companion object{
