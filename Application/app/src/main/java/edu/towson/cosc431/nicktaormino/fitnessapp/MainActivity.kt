@@ -27,7 +27,6 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
     lateinit var db: ExerciseDBRepository
     lateinit var db2: UserDBRepository
     lateinit var cache: IExerciseCache
-    var Launched:Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

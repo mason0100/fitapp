@@ -24,7 +24,7 @@ object ExerciseContract{
 interface IDataBase{
     fun addExercise(exercise: ExerciseListItem)
     fun getExercises(): List<ExerciseListItem>
-    fun getExercise(id:Int): ExerciseListItem?
+    fun getExercise(id: Int): ExerciseListItem?
     fun deleteExercise(exercise:ExerciseListItem)
     fun updateExercise(exercise:ExerciseListItem)
 }
@@ -106,7 +106,7 @@ class ExerciseDatabase(ctx: Context): IDataBase
         with(cursor)
         {
             while(cursor.moveToNext()){
-                val id = getString(getColumnIndex(BaseColumns._ID))
+                val id = getInt(getColumnIndex(BaseColumns._ID))
                 val name = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_NAME))
                 val set1 = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET1))
                 val set2 = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET2))
@@ -140,7 +140,7 @@ class ExerciseDatabase(ctx: Context): IDataBase
         with(cursor)
         {
             while(cursor.moveToNext()){
-                val id = getString(getColumnIndex(BaseColumns._ID))
+                val id = getInt(getColumnIndex(BaseColumns._ID))
                 val name = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_NAME))
                 val set1 = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET1))
                 val set2 = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_SET2))

@@ -37,7 +37,7 @@ class NewExerciseActivity: AppCompatActivity() {
 
     fun clickSave(){
         val intent = Intent()
-        val id = Date().toString()
+        val id = Date().date
         val title: String = exercise_text.editableText.toString()
         val exercise1: String = set1_text.editableText.toString()
         val exercise2: String = set2_text.editableText.toString()

@@ -15,7 +15,7 @@ class ExerciseList: IExerciseList {
     init {
 
         // val dateCreated: String = now().toString()
-        var temp = ExerciseListItem("1","Bench", "1", "2", "3", false)
+        var temp = ExerciseListItem(1,"Bench", "1", "2", "3", false)
 
         exerciseList.add(temp)
         exerciseList.add(temp)
