@@ -14,7 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".NewExerciseActivity"></activity>
-        <activity android:name=".LogIn"></activity>
+        <activity android:name=".LogIn">
+        </activity>
         <activity android:name=".PreviousLog"></activity>
         <service android:name=".MyIntentService"
             android:enabled="true"

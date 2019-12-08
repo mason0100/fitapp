@@ -15,6 +15,9 @@ object ExerciseContract{
         const val COLUMN_NAME_SET3 = "exercise_set3"
         const val COLUMN_NAME_COMPLETED = "exercise_completed"
         const val COLUMN_NAME_DELETED = "deleted"
+        const val TABLE_USER_NAME = "users"
+        const val COLUMN_NAME_USER = "UserName"
+        const val COLUMN_NAME_PASSWORD = "PassWord"
     }
 }
 
@@ -24,6 +27,14 @@ interface IDataBase{
     fun getExercise(id:Int): ExerciseListItem?
     fun deleteExercise(exercise:ExerciseListItem)
     fun updateExercise(exercise:ExerciseListItem)
+}
+
+interface IDataBase2{
+    fun addUser(user:User)
+    fun getUsers():List<User>
+    fun getUser(user:String):User?
+    fun deleteUser(user:User)
+    fun updateUser(user:User)
 }
 
 private const val CREATE_SONG_TABLE = "CREATE TABLE ${ExerciseContract.ExerciseEntry.TABLE_NAME} (" +
@@ -36,7 +47,13 @@ private const val CREATE_SONG_TABLE = "CREATE TABLE ${ExerciseContract.ExerciseE
         "${ExerciseContract.ExerciseEntry.COLUMN_NAME_DELETED} BOOL DEFAULT 0" +
         ")"
 
+private const val CREATE_USER_TABLE = "CREATE TABLE ${ExerciseContract.ExerciseEntry.TABLE_USER_NAME} (" +
+        "${ExerciseContract.ExerciseEntry.COLUMN_NAME_USER} TEXT, " +
+        "${ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD} TEXT, " +
+        ")"
+
 private const val DELETE_EXERCISE_TABLE = "DROP TABLE IF EXISTS ${ExerciseContract.ExerciseEntry.TABLE_NAME}"
+private const val DELETE_USER_TABLE = "DROP TABLE IF EXISTS ${ExerciseContract.ExerciseEntry.TABLE_USER_NAME}"
 
 class ExerciseDatabase(ctx: Context): IDataBase
 {
@@ -164,3 +181,119 @@ private fun toContentValues(exercise: ExerciseListItem): ContentValues{
     cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_COMPLETED, exercise.isComplete)
     return cv
 }
+
+class UserDatabase(ctx: Context): IDataBase2
+{
+
+    class exerciseDBHelper(ctx: Context): SQLiteOpenHelper(ctx, DATABASE_NAME,null, DATABASE_VERSION) {
+        override fun onCreate(db: SQLiteDatabase?) {
+            db?.execSQL(CREATE_USER_TABLE)
+        }
+
+        override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
+            db?.execSQL(DELETE_USER_TABLE)
+            onCreate(db)
+        }
+
+        companion object {
+            val DATABASE_NAME = "exercise.db"
+            val DATABASE_VERSION = 1
+        }
+
+    }
+    private val db: SQLiteDatabase
+
+    init {
+        db = exerciseDBHelper(ctx).writableDatabase
+    }
+
+    override fun addUser(user: User) {
+        val cvs = toContentValues2(user)
+        db.insert(ExerciseContract.ExerciseEntry.TABLE_USER_NAME, null, cvs)
+    }
+
+    override fun getUsers(): List<User> {
+        val project = arrayOf(ExerciseContract.ExerciseEntry.COLUMN_NAME_USER,ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD)
+        val sortOrder = "${BaseColumns._ID} ASC"
+        val selection = "${ExerciseContract.ExerciseEntry.COLUMN_NAME_DELETED} = ?"
+        val selectionArg = arrayOf("0")
+
+        val cursor = db.query(
+            ExerciseContract.ExerciseEntry.TABLE_USER_NAME,
+            project,
+            selection,
+            selectionArg,
+            null,
+            null,
+            sortOrder
+
+
+        )
+        val users = mutableListOf<User>()
+        with(cursor)
+        {
+            while(cursor.moveToNext()){
+                val username = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_USER))
+                val pass = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD))
+                val user = User(username,pass)
+                users.add(user)
+            }
+        }
+        return users
+    }
+
+    override fun getUser(name:String): User? {
+        val project = arrayOf(ExerciseContract.ExerciseEntry.COLUMN_NAME_USER,ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD)
+        val sortOrder = "${BaseColumns._ID} ASC"
+        val selection = "${ExerciseContract.ExerciseEntry.COLUMN_NAME_DELETED} = ?"
+        val selectionArg = arrayOf("0")
+
+        val cursor = db.query(
+            ExerciseContract.ExerciseEntry.TABLE_USER_NAME,
+            project,
+            selection,
+            selectionArg,
+            null,
+            null,
+            sortOrder
+
+
+        )
+        val users = mutableListOf<User>()
+        with(cursor)
+        {
+            while(cursor.moveToNext()){
+                val username = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_USER))
+                val pass = getString(getColumnIndex(ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD))
+                val user = User(username,pass)
+                users.add(user)
+            }
+        }
+        if(users.size == 1) return users[0]
+        else return null
+    }
+
+    override fun deleteUser(user: User) {
+        val cvs = toContentValues2(user)
+        cvs.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_DELETED, "1")
+        val selection = "${ExerciseContract.ExerciseEntry.COLUMN_NAME_USER} = ?"
+        val selectionArg = arrayOf(user.user)
+        db.update(ExerciseContract.ExerciseEntry.TABLE_USER_NAME ,cvs, selection, selectionArg)
+    }
+
+    override fun updateUser(user:User) {
+        val cvs = toContentValues2(user)
+        val selection = "${ExerciseContract.ExerciseEntry.COLUMN_NAME_USER} = ?"
+        val selectionArg = arrayOf(user.user)
+        db.update(ExerciseContract.ExerciseEntry.TABLE_USER_NAME , cvs, selection, selectionArg)
+    }
+
+}
+
+private fun toContentValues2(user: User):ContentValues{
+    val cv = ContentValues()
+    cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_USER, user.user)
+    cv.put(ExerciseContract.ExerciseEntry.COLUMN_NAME_PASSWORD, user.pass)
+    return cv
+}
+

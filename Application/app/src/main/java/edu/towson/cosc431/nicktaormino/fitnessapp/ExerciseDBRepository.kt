@@ -36,3 +36,38 @@ class ExerciseDBRepository(ctx:Context): IExerciseList {
 
 
 }
+
+class UserDBRepository(ctx:Context): IUserList {
+
+    private val db: IDataBase2
+
+    init {
+        db = UserDatabase(ctx)
+    }
+
+    override fun addUser(user:User) {
+        db.addUser(user)
+    }
+
+    override fun getCount(): Int {
+        return db.getUsers().size
+    }
+
+    override fun getUser(id: String): User? {
+        return db.getUser(id)
+    }
+
+    override fun replace(idx: String, user:User) {
+        db.updateUser(user)
+    }
+
+    fun getAll(): List<User> {
+        return db.getUsers()
+    }
+
+    override fun deleteUser(user: User) {
+        db.deleteUser(user)
+    }
+
+
+}

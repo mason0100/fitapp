@@ -9,8 +9,20 @@ interface IExerciseList {
     fun replace(idx: Int, exercise:ExerciseListItem)
 
 }
+interface IUserList{
+    fun addUser(user: User)
+    fun deleteUser(user: User)
+    fun getCount(): Int
+    fun getUser(user:String): User?
+    fun replace(user:String, us:User)
+}
 interface IExerciseCache{
     fun exerciseCount(): Int
     fun getExercise(position: Int): ExerciseListItem
     fun refresh(songs:List<ExerciseListItem>)
+}
+interface IUserCache{
+    fun exerciseCount(): Int
+    fun getExercise(position: Int): User
+    fun refresh(users:List<User>)
 }

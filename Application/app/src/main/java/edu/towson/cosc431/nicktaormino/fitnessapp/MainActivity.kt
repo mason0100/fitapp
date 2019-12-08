@@ -25,7 +25,9 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
     //public members of class
     override lateinit var exerciseList: ExerciseList
     lateinit var db: ExerciseDBRepository
+    lateinit var db2: UserDBRepository
     lateinit var cache: IExerciseCache
+    var Launched:Boolean = false
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,6 +47,7 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         recycler_exercise_list.layoutManager =LinearLayoutManager(this)
 
         db = ExerciseDBRepository(this)
+        db2 = UserDBRepository(this)
         cache = ExerciseCache()
         cache.refresh((db.getAll()))
 
@@ -98,12 +101,10 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
                     HOME_CODE ->{
                         val json: String? = data?.getStringExtra(PreviousLog.todo_extra_key)
                         if (json != null){
-                            val exercise: ExerciseListItem = Gson().fromJson<ExerciseListItem>(json, ExerciseListItem::class.java)
+                            val user: User = Gson().fromJson<User>(json, User::class.java)
                             //Need to add to list
-                            Log.i("Exercise", exercise.toString())
-                            exerciseList.addExercise(exercise)
-                            db.addExercise(exercise)
-                            cache.refresh(db.getAll())
+                            Log.i("Exercise", user.toString())
+                            db2.addUser(user)
                         }
 
                     }
