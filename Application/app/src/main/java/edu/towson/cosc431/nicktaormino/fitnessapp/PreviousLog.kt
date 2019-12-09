@@ -9,6 +9,7 @@ import java.util.*
 class PreviousLog: AppCompatActivity(), IExerciseListController{
     var date: Int? = null
     lateinit var db: ExerciseDBRepository
+    override lateinit var exerciseCache: IExerciseCache
     override lateinit var exerciseList: ExerciseList
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,7 +17,7 @@ class PreviousLog: AppCompatActivity(), IExerciseListController{
 
         db = ExerciseDBRepository(this)
         exerciseList = ExerciseList()
-
+        exerciseCache = ExerciseCache()
         val adapter = ExerciseListAdapter(this)
         previous_data.adapter = adapter
         previous_data.layoutManager = LinearLayoutManager(this)
@@ -37,6 +38,7 @@ class PreviousLog: AppCompatActivity(), IExerciseListController{
                 x++
             }
             exerciseList = list
+            exerciseCache.refresh(exerciseList.getExerciseList())
         }
 
         adapter.notifyDataSetChanged()

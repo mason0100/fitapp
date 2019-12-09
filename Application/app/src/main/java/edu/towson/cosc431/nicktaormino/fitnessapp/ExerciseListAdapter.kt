@@ -21,13 +21,15 @@ class ExerciseListAdapter(private val controller: IExerciseListController) : Rec
 
         view.save_button.setOnClickListener {
             val position = viewHolder.adapterPosition
-            val exercise = controller.exerciseList.getExercise(position)
+            //val exercise = controller.exerciseList.getExercise(position)
+            val exercise = controller.exerciseCache.getExercise(position)
 
             exercise.name = view.exercise_text.text.toString()
             exercise.set1 = view.set1_text.text.toString()
             exercise.set2 = view.set2_text.text.toString()
             exercise.set3 = view.set3_text.text.toString()
             controller.exerciseList.replace(position, exercise)
+            controller.exerciseCache.refresh(controller.exerciseList.getExerciseList())
 
             this.notifyDataSetChanged()
         }

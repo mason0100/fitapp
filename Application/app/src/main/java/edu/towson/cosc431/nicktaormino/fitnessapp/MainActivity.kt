@@ -26,8 +26,8 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
     override lateinit var exerciseList: ExerciseList
     lateinit var db: ExerciseDBRepository
     lateinit var db2: UserDBRepository
-    lateinit var cache: IExerciseCache
-
+    override lateinit var exerciseCache: IExerciseCache
+    //override val exerciseCache: IExerciseCache
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,9 +46,10 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
         recycler_exercise_list.layoutManager =LinearLayoutManager(this)
 
         db = ExerciseDBRepository(this)
-        db2 = UserDBRepository(this)
-        cache = ExerciseCache()
-        cache.refresh((db.getAll()))
+        //db2 = UserDBRepository(this)
+        exerciseCache = ExerciseCache()
+        //updates database
+        exerciseCache.refresh((db.getAll()))
 
         //Buttons
         button_home.setOnClickListener{ launchHomeActivity() }
@@ -94,7 +95,7 @@ class MainActivity : AppCompatActivity(), IExerciseListController {
                             Log.i("Exercise", exercise.toString())
                             exerciseList.addExercise(exercise)
                             db.addExercise(exercise)
-                            cache.refresh(db.getAll())
+                            exerciseCache.refresh(db.getAll())
                         }
                     }
                     HOME_CODE ->{

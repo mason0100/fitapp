@@ -56,6 +56,10 @@ class ExerciseList: IExerciseList {
         return exerciseList.size
     }
 
+    fun getExerciseList(): MutableList<ExerciseListItem>{
+        return exerciseList
+    }
+
 
 
 
@@ -73,10 +77,15 @@ class ExerciseCache : IExerciseCache {
         return exercise.get(position)
     }
 
-    override fun refresh(songs: List<ExerciseListItem>) {
+    override fun refresh(songs: List<ExerciseListItem>): MutableList<ExerciseListItem>{
         this.exercise.clear()
         this.exercise.addAll(songs)
+
+        return exercise
+
     }
+
+
 
     private var exercise: MutableList<ExerciseListItem> = mutableListOf()
 

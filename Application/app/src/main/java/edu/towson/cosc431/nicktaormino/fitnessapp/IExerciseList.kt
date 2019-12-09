@@ -19,10 +19,10 @@ interface IUserList{
 interface IExerciseCache{
     fun exerciseCount(): Int
     fun getExercise(position: Int): ExerciseListItem
-    fun refresh(songs:List<ExerciseListItem>)
+    fun refresh(songs:List<ExerciseListItem>): MutableList<ExerciseListItem>
 }
 interface IUserCache{
-    fun exerciseCount(): Int
+    fun getCount(): Int
     fun getExercise(position: Int): User
     fun refresh(users:List<User>)
 }
